@@ -1,0 +1,82 @@
+domain = 0,0 10,0 10,5 0,5 cm
+nodes = 50,2
+dispersivity = 2.5 mm
+permeability = 1e-5
+diffusion-coeff = 1e-9 m2/s
+porosity = 0.3
+break
+
+zone sable {
+    geometry = domain
+    geochem = sable
+}
+
+#boundary inject {
+#    coordinates = 0,0 0,5 cm
+#    flow-condition = constant-flow at 1 cm/h
+#    transport-condition = flux using tracer
+#    modify at 5 h, transport-condition = flux using sel
+#    modify at 10 h, transport-condition = flux using tracer
+#}
+
+define basis T1(aq)
+
+exclude gases, minerals
+#temp = 12.2°C ; conductivity = onlakoné
+
+unit sable {
+    tot Na[+] = 1 mmol/L
+    tot Cl[-] = 1 mmol/L
+    fug CO2(g) = 0.001
+
+    mineral Quartz = 557 g/L
+    mineral Microcline = 321 g/L
+    mineral Montmorillonite-Ca = 137 g/L , surface = 600 m2/g    #m2/L: surface constante
+    mineral Gypse = 19.3 g/L
+    mineral BaSO4(cr) = 841 mg/L
+    mineral Autunite = 239 mg/L
+    mineral Ferrihydrite = 33 g/L , surface = 0.1 m2/g
+    mineral RaSO4(s) = 1.76 ug/L
+}
+
+unit boue {
+    tot Na[+] = 0.1 mmol/L
+    tot Cl[-] = 0.1 mmol/L
+    mineral Microcline = 29.5 g/L
+    mineral Montmorillonite-Ca = 297 g/L , surface = 700 m2/g
+    mineral Gypse = 403 g/L
+    mineral BaSO4(cr) = 48.3 mg/L
+    mineral Calcite = 16.7 g/L
+    mineral Autunite = 82.2 mg/L
+    mineral Ferrihydrite = 66.9 g/L , surface = 0.2 m2/g
+    mineral RaSO4(s) = 594 ng/L
+}
+
+extend mineral Montmorillonite-Ca {
+  surface = 600 m2/g
+}
+
+extend mineral Ferrihydrite {
+  surface = 0.1 m2/g
+}
+
+
+exclude (UO2)11(CO3)6(OH)12[2-], (UO2)3(CO3)6[6-], U(CO3)5[6-], S3O6[2-], S2[2-], S4[2-], S5[2-], S6[2-], S3[2-], S3O6[2-] 
+exclude Mg2UO2(CO3)3(aq), MgUO2(CO3)3[2-], UO2(CO3)3[4-], Ca2UO2(CO3)3(aq), CaUO2(CO3)3[2-], (UO2)3O(OH)2(HCO3)[+], UO2(H2PO4)(H3PO4)[+]
+
+
+database = /home/sguillon/prodata1104_utf8_MIG_test.tdb
+
+duration = 10 days
+timestep = 1 h
+#timestep = variable {
+# start = 50 s
+# courant-factor = 3.5
+#}
+
+output = ribiere
+output-format = res, vtk
+sample = 100
+ 
+#select T1(aq) in umol/l
+#select aqueous{Na[+]}, fixed{Na[+]} in umol/l
