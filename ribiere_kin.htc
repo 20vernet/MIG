@@ -1,0 +1,133 @@
+domain = 0,0 10,0 10,5 0,5 cm
+nodes = 50,2
+dispersivity = 2.5 mm
+permeability = 1e-5
+diffusion-coeff = 1e-9 m2/s
+porosity = 0.3
+break
+
+zone sable {
+    geometry = domain
+    geochem = sable
+}
+
+#boundary inject {
+#    coordinates = 0,0 0,5 cm
+#    flow-condition = constant-flow at 1 cm/h
+#    transport-condition = flux using tracer
+#    modify at 5 h, transport-condition = flux using sel
+#    modify at 10 h, transport-condition = flux using tracer
+#}
+
+define basis T1(aq)
+
+exclude gases, minerals #, sites
+# temp = 12.2°C ; conductivity = onlakoné
+equilibration-time = 10 y
+unit sable {
+	fug CO2(g) = 1e-3  # un peu plus haut que la pco2 pcq dissolution de carbonates probable
+    fug O2(g) = 0.2  # on est pas loin de l'atmosphere
+    conc Na[+] = 1e-3 molal
+    conc Cl[-] = 1e-3 molal
+    total UO2[2+] = 1e-3 mol/l  # pour faire remonter U
+	conc Mg[2+] = 1.0e-3 mol/l  # pour mettre un peu plus de Mg
+
+    total H2SO4(aq) = 3e-2 mol/l  # pour faire baisser un peu le pH
+
+    mineral Quartz = 557 g/L
+    mineral Kaolinite = 180 g/l, surface = 500 cm2/g
+    mineral Microcline-llnl = 321 g/L, surface = 500 cm2/g
+    mineral Montmorillonite-Ca = 100 g/L, surface = 600 m2/g    #m2/L: je l'ai mis en cinétique lente
+    mineral Gypse = 19.3 g/L
+    mineral Autunite = 239 mg/L
+    mineral Ferrihydrite = 33 g/l, surface = 0.1 m2/g
+}
+
+
+
+exclude (UO2)11(CO3)6(OH)12[2-], (UO2)3(CO3)6[6-], U(CO3)5[6-], S3O6[2-], S2[2-], S4[2-], S5[2-], S6[2-], S3[2-], S3O6[2-] 
+exclude Mg2UO2(CO3)3(aq), MgUO2(CO3)3[2-], UO2(CO3)3[4-], Ca2UO2(CO3)3(aq), CaUO2(CO3)3[2-], (UO2)3O(OH)2(HCO3)[+], UO2(H2PO4)(H3PO4)[+]
+exclude Ethyne(aq), 1Butyne(aq), 1Hexyne(aq), 1Pentyne(aq), 1Heptyne(aq), 1Octyne(aq), 1Propyne(aq), Phenol(aq)
+### 
+### U(3)
+exclude U[3+]
+### soufre
+exclude S2O3[2-], HSO5[-], S2O4[2-], S2O8[2-], S3O6[2-], S4O6[2-], S5O6[2-], S[2-], SO2(aq), S2[2-], S2O6[2-], S3[2-], S4[2-], S5[2-], SO3[2-], HS2O3[-], S2O5[2-], UO2SO3(aq), UO2(SO3)2[2-],
+#Not included in Prodata: HSO5[-], UO2SO3(aq), UO2(SO3)2[2-]
+### Chlore
+exclude ClO[-], ClO3[-], HClO, ClO2[-], ClO4[-], HClO2(aq), FeCl4[2-], FeCl4[-],  UCl[3+], 
+#Not included in Prodata: FeCl4[2-]
+#I replace that specie as FeCl4[-]
+### poly
+exclude  (UO2)3O(OH)2(HCO3)[+], Al13O4(OH)24[7+], Al3(OH)4[5+], H4(H2SiO4)4[4-],  H6(H2SiO4)4[2-], Mg4(OH)4[4+], MgP2O7[2-], (UO2)3(OH)4[2+], (UO2)3(OH)5CO2[+],(UO2)11(CO3)6(OH)12[2-]
+#Not included in Prodata: Al13O4(OH)24[7+], Al3(OH)4[5+], H4(H2SiO4)4[4-], H6(H2SiO4)4[2-], Mg4(OH)4[4+], MgP2O7[2-], (UO2)11(CO3)6(OH)[2-]
+#I replace the specie chess: (UO2)11(CO3)6(OH)[2-]for Prodata:(UO2)11(CO3)6(OH)12[2-]
+### redox inutiles
+exclude CO(aq), HO2[-]
+#Not included in Prodata: HO2[-]
+
+## Fe
+# exclude FeCl[+], FeCl[2+], FeCl2, FeCl2[+], FeCl3(aq), FeCl3[-], FeCl4[-], Fe(OH)CO3(aq)
+#Not included in Prodata: chess FeCl3 = Prodata FeCl3(aq),  FeCl3[-], 
+
+## autres
+exclude  CaP2O7[2-],	UO2(CO3)3[4-],	FeCl2(aq), FeCl2[+], HP2O7[3-],	KHSO4(aq), UO2(CO3)2[2-],	NaP2O7[3-],	NaHP2O7[2-],	Na2P2O7[2-],	P2O7[4-]
+exclude	 AlHPO4[+],	MgH2PO4[+],	H2P2O7[2-],	CaH2PO4[+]
+exclude	 Al(SO4)2[-],	KP2O7[3-],	H3P2O7[-],	UO2(OH)4[2-],	UO2(SO4)2[2-],	UO2Cl[+],	UO2H2PO4[+],	Al2(OH)2[4+]
+exclude	 (UO2)2CO3(OH)3[-],	FeCl2[+],	Fe(SO4)2[-],	FeCl[2+],	UO2Cl2(aq),	AlH2PO4[2+],	UO2(H2PO4)2(aq),	H4P2O7(aq)
+exclude	 UO2H3PO4[2+],	FeCl4[-],	(UO2)2(OH)2[2+],	FeH2PO4[2+],	Fe2(OH)2[4+]
+exclude	 UO2(H2PO4)(H3PO4)[+],	(UO2)3(CO3)6[6-],	(UO2)2OH[3+],	(UO2)3(OH)7[-],	(UO2)3(OH)5[+],	Fe3(OH)4[5+],	(UO2)4(OH)7[+],	PH4[+]
+exclude  CaUO2(CO3)3[2-], Ca2UO2(CO3)3(aq)
+
+extend mineral Montmorillonite-Ca {
+  surface = 600 m2/g
+}
+
+extend mineral Ferrihydrite {
+  surface = 0.1 m2/g
+}
+
+extend mineral Microcline-llnl {
+  surface = 500 cm2/g
+}
+
+extend mineral Montmorillonite-Ca {
+	kinetics {
+		rate = -1.2e-15 mol/m2/s
+		area = Montmorillonite-Ca
+		y-term, species = Montmorillonite-Ca
+		w-term {
+			species = H[+]
+			power = 0.22
+		}
+	}
+	kinetics {
+		rate = 1.9e-15 mol/m2/s
+		area = Montmorillonite-Ca
+		y-term, species = Montmorillonite-Ca
+		w-term {
+			species = H[+]
+			power = 0.22
+		}
+	}
+}
+
+redox = enabled
+
+database = /home/nseigneur/hytec/inputs/tdb/prodata1104_utf8_MIG_test.tdb
+
+duration = 20 h
+timestep = 1 h
+#timestep = variable {
+# start = 50 s
+# courant-factor = 3.5
+#}
+
+#exclude HFO(w)-O[-], HFO(w)-OH2[+], HFO(s)-O[-], HFO(s)-OH2[+], HFO(s)-OHCa[2+], HFO(w)-OMg[+], HFO(w)-OCO2H, HFO(w)-OHSO4[2-], HFO(w)-SO4[-], HFO(w)-OCO2[-]
+#exclude HFO(w)-OCa[+], HFO(w)-OH, HFO(s)-OH
+output = ribiere
+output-format = res, vtk
+sample = 100
+ 
+#select T1(aq) in umol/l
+#select aqueous{Na[+]}, fixed{Na[+]} in umol/l
