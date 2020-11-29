@@ -1,5 +1,5 @@
-domain = 0,0 10,0 10,5 0,5 cm
-nodes = 50,2
+domain = 0,0 100,0 100,10 0,10 m
+nodes = 50,1
 dispersivity = 2.5 mm
 permeability = 1e-5
 diffusion-coeff = 1e-9 m2/s
@@ -7,8 +7,13 @@ porosity = 0.3
 break
 
 zone sable {
-    geometry = domain
+    geometry = 2.5,5 5,10
     geochem = sable
+}
+
+zone granite {
+  geometry = 52.5,5 95,10
+  geochem = granit
 }
 
 #boundary inject {
@@ -22,7 +27,6 @@ zone sable {
 define basis T1(aq)
 
 exclude gases, minerals
-#temp = 12.2°C ; conductivity = onlakoné
 
 unit sable {
     tot Na[+] = 1 mmol/L
@@ -50,6 +54,13 @@ unit boue {
     mineral Autunite = 82.2 mg/L
     mineral Ferrihydrite = 66.9 g/L , surface = 0.2 m2/g
     mineral RaSO4(s) = 594 ng/L
+}
+
+unit granit{
+    tot Na[+] = 1 mmol/L
+    tot Cl[-] = 1 mmol/L
+    fug CO2(g) = 0.001
+    mineral Quartz = 1 kg/L  
 }
 
 extend mineral Montmorillonite-Ca {
