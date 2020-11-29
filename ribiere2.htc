@@ -18,7 +18,7 @@ zone granite {
 
 boundary inject {
     coordinates = 0,0 0,30 cm
-    flow-condition = constant-flow at 1 m/y
+    flow-condition = constant-flow at 3e-8 m/s
     transport-condition = flux using tracer
 }
 
@@ -85,8 +85,8 @@ exclude Mg2UO2(CO3)3(aq), MgUO2(CO3)3[2-], UO2(CO3)3[4-], Ca2UO2(CO3)3(aq), CaUO
 
 database = /home/sguillon/prodata1104_utf8_MIG_test.tdb
 
-duration = 10 days
-timestep = 1 h
+duration = 10 y
+timestep = variable
 
 output = ribiere
 output-format = res, vtk
