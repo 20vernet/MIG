@@ -7,12 +7,12 @@ porosity = 0.3
 break
 
 zone sable {
-    geometry = 2.5,5 5,10
+    geometry = rectangle 2.5,5 5,10
     geochem = sable
 }
 
 zone granite {
-  geometry = 52.5,5 95,10
+  geometry = rectangle 52.5,5 95,10
   geochem = granit
 }
 
@@ -24,7 +24,7 @@ zone granite {
 #    modify at 10 h, transport-condition = flux using tracer
 #}
 
-define basis T1(aq)
+
 
 exclude gases, minerals
 
@@ -35,7 +35,7 @@ unit sable {
 
     mineral Quartz = 557 g/L
     mineral Microcline = 321 g/L
-    mineral Montmorillonite-Ca = 137 g/L , surface = 600 m2/g    #m2/L: surface constante
+    mineral Montmorillonite-Ca = 137 g/L , surface = 600 m2/g
     mineral Gypse = 19.3 g/L
     mineral BaSO4(cr) = 841 mg/L
     mineral Autunite = 239 mg/L
