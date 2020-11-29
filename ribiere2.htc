@@ -1,19 +1,19 @@
-domain = 0,0 100,0 100,10 0,10 m
-nodes = 50,1
+domain = 0,0 200,0 200,30 0,30 m
 dispersivity = 2.5 mm
 permeability = 1e-5
 diffusion-coeff = 1e-9 m2/s
 porosity = 0.3
+darcy-velocity = 1e-6 m/s
 break
 
 zone sable {
-    geometry = rectangle 2.5,5 5,10
+    geometry = rectangle 15,15 30,30 m, nodes = 20,1
     geochem = sable
 }
 
 zone granite {
-  geometry = rectangle 52.5,5 95,10
-  geochem = granit
+    geometry = rectangle 115,15 170,30 m, nodes = 50,1
+    geochem = granit
 }
 
 #boundary inject {
@@ -56,7 +56,7 @@ unit boue {
     mineral RaSO4(s) = 594 ng/L
 }
 
-unit granit{
+unit granit {
     tot Na[+] = 1 mmol/L
     tot Cl[-] = 1 mmol/L
     fug CO2(g) = 0.001
