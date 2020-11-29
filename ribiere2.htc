@@ -93,4 +93,5 @@ output-format = res, vtk
 sample = 100
  
 select T1(aq) in umol/l
-select aqueous{UO2[2+]}, fixed{UO2[2+]} in umol/l
+select aqueous{UO2[2+]}, fixed{UO2[2+]}, mineral{UO2[2+]} in umol/L
+select Autunite in mg/L
