@@ -12,6 +12,7 @@ zone sable {
 }
 
 zone granite {
+    porosity = 0.05
     geometry = rectangle 115,15 170,30 m, nodes = 50,1
     geochem = granit
 }
@@ -71,7 +72,7 @@ unit granit {
 
 unit tracer {
     tot T1(aq) = 1 mmol/L
-    mineral Quartz = 1kg/l
+    tot UO2[2+] = 10 nmol/L
     tot Na[+] = 1 mmol/L
     tot Cl[-] = 1 mmol/L
 }
