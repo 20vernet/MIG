@@ -12,20 +12,19 @@ zone sable {
 }
 
 zone granite {
-    porosity = 0.03
     geometry = rectangle 115,15 170,30 m, nodes = 50,1
     geochem = granit
 }
 
 boundary inject {
     coordinates = 0,0 0,30 m
-    flow-condition = constant-head at 370 m
+    flow-condition = constant-head at 20 m
     transport-condition = flux using tracer
 }
 
 boundary droite {
     coordinates = 200,0 200,30 m
-    flow-condition = constant-head at 350 m
+    flow-condition = constant-head at 0 m
 }
 
 
@@ -86,6 +85,27 @@ extend mineral Ferrihydrite {
   surface = 0.1 m2/g
 }
 
+extend mineral Montmorillonite-Ca {
+	kinetics {
+		rate = -1.2e-15 mol/m2/s
+		area = Montmorillonite-Ca
+		y-term, species = Montmorillonite-Ca
+		w-term {
+			species = H[+]
+			power = 0.22
+		}
+	}
+	kinetics {
+		rate = 1.9e-15 mol/m2/s
+		area = Montmorillonite-Ca
+		y-term, species = Montmorillonite-Ca
+		w-term {
+			species = H[+]
+			power = 0.22
+		}
+	}
+}
+
 
 exclude (UO2)11(CO3)6(OH)12[2-], (UO2)3(CO3)6[6-], U(CO3)5[6-], S3O6[2-], S2[2-], S4[2-], S5[2-], S6[2-], S3[2-], S3O6[2-] 
 exclude Mg2UO2(CO3)3(aq), MgUO2(CO3)3[2-], UO2(CO3)3[4-], Ca2UO2(CO3)3(aq), CaUO2(CO3)3[2-], (UO2)3O(OH)2(HCO3)[+], UO2(H2PO4)(H3PO4)[+]
@@ -105,14 +125,13 @@ select aqueous{UO2[2+]}, fixed{UO2[2+]}, mineral{UO2[2+]} in umol/L
 select pH
 select minerals in mg/L
 
-select aqueous{Ca[2+]}; fixed{Ca[2+]}
-select aqueous{Mg[2+]}; fixed{Mg[2+]}
-select aqueous{Na[+]}; fixed{Na[+]}
-select aqueous{K[+]}; fixed{K[+]}
-select aqueous{H[+]}; fixed{H[+]}
-select aqueous{Ba[2+]}; fixed{Ba[2+]}
-select aqueous{Ra[2+]}; fixed{Ra[2+]}
-select aqueous{Ca[2+]}; fixed{Ca[2+]}
-select aqueous{HPO4[2-]}; fixed{HPO4[2-]}
-select aqueous{SO4[2-]}; fixed{SO4[2-]}
-select aqueous{Fe[2+]}; fixed{Fe[2+]}
+select aqueous{Ca[2+]}, fixed{Ca[2+]}
+select aqueous{Mg[2+]}, fixed{Mg[2+]}
+select aqueous{Na[+]}, fixed{Na[+]}
+select aqueous{K[+]}, fixed{K[+]}
+select aqueous{H[+]}, fixed{H[+]}
+select aqueous{Ba[2+]}, fixed{Ba[2+]}
+select aqueous{Ra[2+]}, fixed{Ra[2+]}
+select aqueous{PO4[3-]}, fixed{PO4[3-]}
+select aqueous{SO4[2-]}, fixed{SO4[2-]}
+select aqueous{Fe[3+]}, fixed{Fe[3+]}
