@@ -105,4 +105,14 @@ select aqueous{UO2[2+]}, fixed{UO2[2+]}, mineral{UO2[2+]} in umol/L
 select pH
 select minerals in mg/L
 
-#ajout des select
+select aqueous{Ca[2+]}; fixed{Ca[2+]}
+select aqueous{Mg[2+]}; fixed{Mg[2+]}
+select aqueous{Na[+]}; fixed{Na[+]}
+select aqueous{K[+]}; fixed{K[+]}
+select aqueous{H[+]}; fixed{H[+]}
+select aqueous{Ba[2+]}; fixed{Ba[2+]}
+select aqueous{Ra[2+]}; fixed{Ra[2+]}
+select aqueous{Ca[2+]}; fixed{Ca[2+]}
+select aqueous{HPO4[2-]}; fixed{HPO4[2-]}
+select aqueous{SO4[2-]}; fixed{SO4[2-]}
+select aqueous{Fe[2+]}; fixed{Fe[2+]}
