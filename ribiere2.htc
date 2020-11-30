@@ -1,9 +1,9 @@
 domain = 0,0 200,0 200,30 0,30 m
 dispersivity = 2.5 mm
-permeability = 1e-7
+permeability = 5e-6
 diffusion-coeff = 1e-9 m2/s
 porosity = 0.3
-darcy-velocity = 1e-6 m/s
+flow-regime = saturated, stationary
 
 
 zone sable {
@@ -30,6 +30,7 @@ boundary droite {
 
 
 exclude gases, minerals
+exclude BaRaSO4
 
 define basis T1(aq)
 
@@ -72,7 +73,10 @@ unit granit {
 
 unit tracer {
     tot T1(aq) = 1 mmol/L
-    tot UO2[2+] = 10 nmol/L
+    mineral Quartz = 10 g/L
+    mineral Microcline = 100 g/L
+    mineral Gypse = 19.3 g/L
+    mineral Ferrihydrite = 33 g/L , surface = 0.1 m2/g
     tot Na[+] = 1 mmol/L
     tot Cl[-] = 1 mmol/L
 }
@@ -115,7 +119,10 @@ exclude Mg2UO2(CO3)3(aq), MgUO2(CO3)3[2-], UO2(CO3)3[4-], Ca2UO2(CO3)3(aq), CaUO
 database = /home/sguillon/prodata1104_utf8_MIG_test.tdb
 
 duration = 15 y
-timestep = variable
+timestep = variable {
+    minimum = 1 h
+    start = 1 h
+}
 
 output = ribiere
 output-format = res, vtk
@@ -125,14 +132,14 @@ select T1(aq) in umol/l
 select aqueous{UO2[2+]}, fixed{UO2[2+]}, mineral{UO2[2+]} in umol/L
 select pH
 select minerals in mg/L
-
+select x-flowrate
 select aqueous{Ca[2+]}, fixed{Ca[2+]}
 select aqueous{Mg[2+]}, fixed{Mg[2+]}
 select aqueous{Na[+]}, fixed{Na[+]}
 select aqueous{K[+]}, fixed{K[+]}
 select aqueous{H[+]}, fixed{H[+]}
 select aqueous{Ba[2+]}, fixed{Ba[2+]}
-select aqueous{Ra[2+]}, fixed{Ra[2+]}
+#select aqueous{Ra[2+]}, fixed{Ra[2+]}
 select aqueous{PO4[3-]}, fixed{PO4[3-]}
 select aqueous{SO4[2-]}, fixed{SO4[2-]}
 select aqueous{Fe[3+]}, fixed{Fe[3+]}
