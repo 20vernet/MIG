@@ -1,6 +1,6 @@
 domain = 0,0 200,0 200,30 0,30 m
 dispersivity = 2.5 mm
-permeability = 1e-5
+permeability = 1e-4
 diffusion-coeff = 1e-9 m2/s
 porosity = 0.3
 darcy-velocity = 1e-6 m/s
@@ -18,7 +18,7 @@ zone granite {
 
 boundary inject {
     coordinates = 0,0 0,30 cm
-    flow-condition = constant-flow at 3e-8 m/s
+    flow-condition = constant-flow at 1e-6,0 m/s
     transport-condition = flux using tracer
 }
 
