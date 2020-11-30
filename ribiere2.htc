@@ -22,6 +22,10 @@ boundary inject {
     transport-condition = flux using tracer
 }
 
+boundary droite {
+    coordinates = 200,0 200,30 m
+    flow-condition = constant-head at 0 m
+}
 
 
 exclude gases, minerals
@@ -67,6 +71,9 @@ unit granit {
 
 unit tracer {
     tot T1(aq) = 1 mmol/L
+    mineral Quartz = 1kg/l
+    tot Na[+] = 1 mmol/L
+    tot Cl[-] = 1 mmol/L
 }
 
 
@@ -95,3 +102,5 @@ sample = 100
 select T1(aq) in umol/l
 select aqueous{UO2[2+]}, fixed{UO2[2+]}, mineral{UO2[2+]} in umol/L
 select Autunite in mg/L
+select pH
+select Gypse
