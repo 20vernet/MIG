@@ -1,6 +1,6 @@
 domain = 0,0 200,0 200,30 0,30 m
 dispersivity = 2.5 mm
-permeability = 1e-4
+permeability = 1e-7
 diffusion-coeff = 1e-9 m2/s
 porosity = 0.3
 darcy-velocity = 1e-6 m/s
@@ -12,19 +12,20 @@ zone sable {
 }
 
 zone granite {
+    porosity = 0.03
     geometry = rectangle 115,15 170,30 m, nodes = 50,1
     geochem = granit
 }
 
 boundary inject {
-    coordinates = 0,0 0,30 cm
-    flow-condition = constant-flow at 1e-6,0 m/s
+    coordinates = 0,0 0,30 m
+    flow-condition = constant-head at 370 m
     transport-condition = flux using tracer
 }
 
 boundary droite {
     coordinates = 200,0 200,30 m
-    flow-condition = constant-head at 0 m
+    flow-condition = constant-head at 350 m
 }
 
 
@@ -92,7 +93,7 @@ exclude Mg2UO2(CO3)3(aq), MgUO2(CO3)3[2-], UO2(CO3)3[4-], Ca2UO2(CO3)3(aq), CaUO
 
 database = /home/sguillon/prodata1104_utf8_MIG_test.tdb
 
-duration = 10 y
+duration = 15 y
 timestep = variable
 
 output = ribiere
@@ -101,6 +102,7 @@ sample = 100
  
 select T1(aq) in umol/l
 select aqueous{UO2[2+]}, fixed{UO2[2+]}, mineral{UO2[2+]} in umol/L
-select Autunite in mg/L
 select pH
-select Gypse
+select minerals in mg/L
+
+#ajout des select
