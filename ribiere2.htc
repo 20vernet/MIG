@@ -120,7 +120,7 @@ exclude Mg2UO2(CO3)3(aq), MgUO2(CO3)3[2-], UO2(CO3)3[4-], Ca2UO2(CO3)3(aq), CaUO
 
 database = /home/sguillon/prodata1104_utf8_MIG_test.tdb
 
-duration = 15 y
+duration = 100 y
 timestep = variable {
     minimum = 1 h
     start = 1 h
@@ -128,7 +128,7 @@ timestep = variable {
 
 output = ribiere
 output-format = res, vtk
-sample = 100
+sample = 400
  
 select T1(aq) in umol/l
 select aqueous{UO2[2+]}, fixed{UO2[2+]}, mineral{UO2[2+]} in umol/L
