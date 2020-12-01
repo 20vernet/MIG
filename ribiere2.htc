@@ -67,7 +67,9 @@ unit granit {
     tot Na[+] = 1 mmol/L
     tot Cl[-] = 1 mmol/L
     fug CO2(g) = 0.001
-    mineral Quartz = 1 kg/L  
+    mineral Quartz = 1 kg/L
+    mineral Microcline = 1 kg/L
+    mineral Ferrihydrite = 33 g/L , surface = 0.1 m2/g
 }
 
 
